@@ -6,20 +6,25 @@
 > ![전체시연영상](img/전체시연.gif)
 
 > **델타로봇**
-> ![델타로봇](img/델타로봇.jpg)
+> ![델타로봇](./img/델타로봇.jpg)
 
 ## 목차
 
-```markdown
-- [1. 프로젝트 개요](#1-프로젝트-개요)
-- [2. 팀원 및 역할](#2-팀원-및-역할)
-- [3. 시스템 구조](#3-시스템-구조)
-- [4. 주요 기술 (Key Technologies)](#4-주요-기술-key-technologies)
+
+- [2024-2 ~ 2025-1 인천대 임베디드시스템학과 캡스톤프로젝트](#2024-2--2025-1-인천대-임베디드시스템학과-캡스톤프로젝트)
+  - [시연](#시연)
+  - [목차](#목차)
+  - [1. 프로젝트 개요](#1-프로젝트-개요)
+  - [2. 팀원 및 역할](#2-팀원-및-역할)
+  - [3. 시스템 구조](#3-시스템-구조)
+  - [4. 주요 기술 (Key Technologies)](#4-주요-기술-key-technologies)
     - [4.1 역기구학 (Inverse Kinematics)](#41-역기구학-inverse-kinematics)
     - [4.2 펌웨어 (Firmware Implementation)](#42-펌웨어-firmware-implementation)
+    - [기능 이미지](#기능-이미지)
     - [4.3 통신 인터페이스 (Communication Interface)](#43-통신-인터페이스-communication-interface)
-- [5. 앤드이펙터 좌표 보간](#5-앤드이펙터-좌표-보간)
-```
+  - [Troubleshooting (문제 해결 과정)](#troubleshooting-문제-해결-과정)
+    - [앤드이펙터 좌표 오차 및 보간](#앤드이펙터-좌표-오차-및-보간)
+
 
 ## 1. 프로젝트 개요
 
@@ -28,8 +33,9 @@
 
 ## 2. 팀원 및 역할
 
+> * **배경근**: **델타로봇 제어 및 통신 인터페이스 구현 (역기구학, 펌웨어 및 통신 인터페이스)**
+
 * 박시우: 시스템 설계 및 제작
-* **배경근**: **델타로봇 제어 및 통신 인터페이스 구현 (역기구학, 펌웨어 및 통신 인터페이스)**
 * 노영빈: 인식기술 구현, 로봇팔 연동
 * 박지민: 프레임 설계 및 제작, 대시보드 페이지 제작
 * 김다솜: 프레임 설계 및 제작, 데이터 수집
@@ -40,14 +46,14 @@
 
 - **High-Level (Jetson Xavier NX)**: Python, OpenCV, YOLO (객체 인식), Flask (웹 서버), Serial 통신 담당.
 - **Low-Level (Teensy 4.1)**: C++, Stepper Motor 제어, Interrupt 처리, Real-time 명령 수행.
-- Jetson Xavier NX
+- **Jetson Xavier NX**
 
   - GPU : NVIDIA Volta GPU (384 CUDA Cores)
   - CPU : 6-core NVIDIA Carmel ARMv8.2
   - RAM : 8GB 128-bit LPDDR4x
   - Storage : 16GB eMMC 5.1
   - OS : Ubuntu 20.04
-- Teensy 4.1
+- **Teensy 4.1**
 
   - CPU : ARM Cortex-M7
   - RAM : 1MB
@@ -56,7 +62,7 @@
 
 ## 4. 주요 기술 (Key Technologies)
 
-이 섹션에서는 **역기구학(Inverse Kinematics)**, **펌웨어(Firmware)** 및 **통신 인터페이스(Communication Interface)**에 대해 상세히 기술합니다.
+> 역기구학(Inverse Kinematics),펌웨어(Firmware),통신 인터페이스(Communication Interface)에 대해 상세히 기술합니다.
 
 ### 4.1 역기구학 (Inverse Kinematics)
 
