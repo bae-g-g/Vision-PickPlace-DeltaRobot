@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Live Camera Stream</title>
+	<style>
+		body {
+			margin: 0;
+			background: #000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+	<script>
+		let lastConfirmed = null;
+		function pollCenter() {
+			fetch('/get_center')
+				.then(res => res.json())
+				.then(data => {
+					if (data.center && data.center !== lastConfirmed) {
+						lastConfirmed = data.center;
+						fetch('/run_delta_robot', { method: 'POST' })
+							.then(r => r.json());
+					}
+				});
+			setTimeout(pollCenter, 500);
+		}
+		pollCenter();
+	</script>
+</head>
+
+<body>
+	<img src="{{ url_for('video_feed') }}" alt="Live stream">
+	<button onclick="runDeltaRobot(); return false;">Run Delta Robot</button>
+	<button onclick="fetch('{{ url_for('reset_delta_robot') }}', {method: 'POST'}); return false;">Reset Delta
+		Robot</button>
+</body>
+
+</html>
