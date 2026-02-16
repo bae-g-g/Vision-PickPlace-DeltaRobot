@@ -5,25 +5,29 @@
 > **전체 시연 영상**
 > ![전체시연영상](img/전체시연.gif)
 
+<br>
+
 > **델타로봇**
 > ![델타로봇](img/델타로봇.jpg)
 
 ## 목차
 
 
-- [2024-2 ~ 2025-1 인천대 임베디드시스템학과 캡스톤프로젝트](#2024-2--2025-1-인천대-임베디드시스템학과-캡스톤프로젝트)
-  - [시연](#시연)
-  - [목차](#목차)
-  - [1. 프로젝트 개요](#1-프로젝트-개요)
-  - [2. 팀원 및 역할](#2-팀원-및-역할)
-  - [3. 시스템 구조](#3-시스템-구조)
-  - [4. 주요 기술 (Key Technologies)](#4-주요-기술-key-technologies)
-    - [4.1 역기구학 (Inverse Kinematics)](#41-역기구학-inverse-kinematics)
-    - [4.2 펌웨어 (Firmware Implementation)](#42-펌웨어-firmware-implementation)
-    - [기능 이미지](#기능-이미지)
-    - [4.3 통신 인터페이스 (Communication Interface)](#43-통신-인터페이스-communication-interface)
-  - [Troubleshooting (문제 해결 과정)](#troubleshooting-문제-해결-과정)
-    - [앤드이펙터 좌표 오차 및 보간](#앤드이펙터-좌표-오차-및-보간)
+- [시연](#시연)
+- [목차](#목차)
+- [1. 프로젝트 개요](#1-프로젝트-개요)
+- [2. 팀원 및 역할](#2-팀원-및-역할)
+  
+- [3. 시스템 구조](#3-시스템-구조)
+- 
+- [4. 주요 기술 (Key Technologies)](#4-주요-기술-key-technologies)
+  - [4.1 역기구학 (Inverse Kinematics)](#41-역기구학-inverse-kinematics)
+  - [4.2 펌웨어 (Firmware Implementation)](#42-펌웨어-firmware-implementation)
+  - [기능 이미지](#기능-이미지)
+  - [4.3 통신 인터페이스 (Communication Interface)](#43-통신-인터페이스-communication-interface)
+  
+- [Troubleshooting (문제 해결 과정)](#troubleshooting-문제-해결-과정)
+  - [앤드이펙터 좌표 오차 및 보간](#앤드이펙터-좌표-오차-및-보간)
 
 
 ## 1. 프로젝트 개요
@@ -78,8 +82,11 @@
   - `L`: 상부 링크(Upper Link) 길이 (400mm)
   - `l`: 하부 링크(Lower Link) 길이 (890mm)
 
+----
+
 <details>
 <summary>역기구학 계산 과정</summary>
+<br>
 델타로봇을
 
 - 모터가 위치한 **베이스 → B**
@@ -202,11 +209,14 @@ arctan을 이용해 θ값을구하는것이 가능해진다.
 
 </details>
 
+-----
+
 ### 4.2 펌웨어 (Firmware Implementation)
 
-Arduino 기반의 펌웨어는 실시간 모터 제어와 센싱을 담당합니다.
+펌웨어는 실시간 모터 제어와 센싱을 담당합니다.
 
 - **개발 환경**: Arduino IDE / PlatformIO
+  
 - **핵심 라이브러리**:
 
   - `AccelStepper`: 스텝 모터의 부드러운 가감속(Acceleration/Deceleration) 제어.
@@ -224,10 +234,11 @@ Arduino 기반의 펌웨어는 실시간 모터 제어와 센싱을 담당합니
 
 ### 기능 이미지
 
+
 <details>
 <summary>속도 동기화 비교 이미지</summary>
 
-> 상 : 비동기
+> 상 : 비동기 <br>
 > 하 : 동기
 
 ![동기화](./img/동기화.gif)
@@ -244,7 +255,7 @@ Arduino 기반의 펌웨어는 실시간 모터 제어와 센싱을 담당합니
 
 ### 4.3 통신 인터페이스 (Communication Interface)
 
-Jetson Nano(싱글보드 컴퓨터)와 teensy4.1(mcu) 간의 빠르고 신뢰성 있는 데이터 전송을 위해 **Serial Communication (USB)**을 사용합니다.
+Jetson Nano(싱글보드 컴퓨터)와 teensy4.1(mcu) 간의 빠르고 신뢰성 있는 데이터 전송을 위해 Serial Communication(USB)을 사용합니다.
 
 - **구현 위치**:
 
@@ -284,10 +295,10 @@ Jetson Nano(싱글보드 컴퓨터)와 teensy4.1(mcu) 간의 빠르고 신뢰성
 
 **2. 원인 분석 및 파악**
 
-- **카메라 왜곡 검증**:
+- **카메라 왜곡 검증** :
   - 만약 카메라 렌즈의 왜곡(Radial Distortion)이 원인이라면, 정형적인 패턴으로 오차가 발생해야 했습니다.
   - 하지만 실제 측정된 오차는 위치와 무관하게 불규칙적으로 발생했으므로, 렌즈 왜곡이 주원인이 아님을 확인했습니다.
-- **실제 원인 **:
+- **실제 원인** :
   - 장시간 반복 테스트 결과, 감속기의 장력 풀림과 급격한 기동 시 발생하는 진동이 오차의 핵심 원인임을 확인했습니다.
 
 **3. 해결**
